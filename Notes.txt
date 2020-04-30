@@ -1,0 +1,19 @@
+
+ ### Miscellaneous Notes
+
+- initial challenges
+  - would not connect with the database .... use correct request mapping in @RequestMapping  /seedinspection
+  - add &allowPublicKeyRetrieval=true to datasource url in application properties
+  - unable to retrieve data from database.  low level IllegalstateException message in "target" module
+==========================================================================================================================================
+==========================================================================================================================================
+RESTFUL SPRING BOOT API:
+Intellij --> Create new project -->   Spring Initializr (left column) --> next
+establish project settings --> next --> select:
+   - Developer Tools --> Spring Boot Dev Tools / ?Lombok?
+   - Web --> Spring Web
+   - SQL --> Spring Data JPA
+   - Ops --> Spring Boot Actuator
+==========================================================================================================================================
+==========================================================================================================================================
+==========================================================================================================================================

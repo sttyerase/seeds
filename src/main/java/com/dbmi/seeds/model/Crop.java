@@ -9,23 +9,24 @@ import javax.persistence.Id;
 @Entity
 public class Crop {
 
-    private @Id @GeneratedValue int  cropId;
+    @Id @GeneratedValue
+    private long  cropId;
     private String cropName;
     private String cropDescription;
 
     public Crop() {}
 
-    public Crop(int id, String name, String desc) {
+    public Crop(long id, String name, String desc) {
         this.cropId          = id;
         this.cropName        = name;
         this.cropDescription = desc;
     } // CONSTRUCTOR(INT,STRING,STRING)
 
-    public int getCropId() {
+    public long getCropId() {
         return cropId;
     } // GETCROPID()
 
-    public void setCropId(int cropId) {
+    public void setCropId(long cropId) {
         this.cropId = cropId;
     } // SETCROPID(INT)
 

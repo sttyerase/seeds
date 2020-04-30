@@ -5,6 +5,7 @@ import com.dbmi.seeds.model.CropRepository;
 
 import com.dbmi.seeds.model.CropRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,11 @@ import java.util.Map;
 public class CropController {
     @Autowired
     private CropRepository cropRepository;
+
+    CropController(CropRepository cropRepository) {
+        this.cropRepository = cropRepository;
+    }
+
     /**
      * Get all crops list.
      *
@@ -27,6 +33,7 @@ public class CropController {
     public List<Crop> getAllCrops() {
         return cropRepository.findAll();
     } // GETALLCROPS()
+
     /**
      * Gets crops by id.
      *
@@ -34,7 +41,7 @@ public class CropController {
      * @return the crops by id
      * @throws ResourceNotFoundException the resource not found exception
      */
-    @GetMapping("/crops/{id}")
+    @GetMapping("/crops/{cropId}")
     public ResponseEntity<Crop> getCropsById(@PathVariable(value = "cropId") Long cropId)
             throws ResourceNotFoundException {
         Crop crop =
@@ -42,7 +49,8 @@ public class CropController {
                         .findById(cropId)
                         .orElseThrow(() -> new ResourceNotFoundException("Crop not found on :: " + cropId));
         return ResponseEntity.ok().body(crop);
-    }
+    } // GETCROPSBYID(LONG)
+
     /**
      * Create crop crop.
      *
@@ -52,7 +60,8 @@ public class CropController {
     @PostMapping("/crops")
     public Crop createCrop(@Valid @RequestBody Crop crop) {
         return cropRepository.save(crop);
-    }
+    } // CREATECROP(crop)
+
     /**
      * Update crop response entity.
      *
@@ -75,6 +84,7 @@ public class CropController {
         final Crop updatedCrop = cropRepository.save(crop);
         return ResponseEntity.ok(updatedCrop);
     } // UPDATECROP(@PATHVARIABLE)
+
     /**
      * Delete crop map.
      *
@@ -101,7 +111,7 @@ public class CropController {
 
     @GetMapping("/error")
     public ResponseEntity<String> getError() throws Exception{
-        return ResponseEntity.ok("This is an error.");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("500 Internal server error.");
     } // GETHOME()
 
 } // CLASS
