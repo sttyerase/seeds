@@ -57,7 +57,7 @@ public class CropController {
      * @param crop the crop
      * @return the crop
      */
-    @PostMapping("/crops")
+    @PostMapping("/crops/new")
     public Crop createCrop(@Valid @RequestBody Crop crop) {
         return cropRepository.save(crop);
     } // CREATECROP(crop)
@@ -92,7 +92,7 @@ public class CropController {
      * @return the map
      * @throws Exception the exception
      */
-    @DeleteMapping("/crop/{id}")
+    @DeleteMapping("/crops/delete/{id}")
     public Map<String, Boolean> deleteCrop(@PathVariable(value = "id") Long cropId) throws Exception {
         Crop crop =
                 cropRepository
