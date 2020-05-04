@@ -1,7 +1,7 @@
 package com.dbmi.seeds.model;
 
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface CropRepository extends JpaRepository<Crop, Long> { }
+public interface CropRepository extends CrudRepository<Crops, Long> { }

@@ -4,19 +4,21 @@ import com.sun.jdi.StringReference;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Crop {
+public class Crops {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long  cropId;
     private String cropName;
     private String cropDescription;
 
-    public Crop() {}
+    public Crops() {}
 
-    public Crop(long id, String name, String desc) {
+    public Crops(long id, String name, String desc) {
         this.cropId          = id;
         this.cropName        = name;
         this.cropDescription = desc;
