@@ -8,6 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/seedinspection")
 public class CropController {
@@ -29,39 +33,38 @@ public class CropController {
         return ResponseEntity.ok().body(myCrop);
     } // GETCROPSBYID(LONG)
 
-    /*
     @PostMapping("/crops/new")
-    public Crop createCrop(@Valid @RequestBody Crop crop) {
+    public Crops createCrop(@Valid @RequestBody Crops crop) {
         return cropRepository.save(crop);
     } // CREATECROP(crop)
 
     @PutMapping("/crops/{id}")
-    public ResponseEntity<Crop> updateCrop(
-            @PathVariable(value = "id") Long cropId, @Valid @RequestBody Crop cropDetails)
+    public ResponseEntity<Crops> updateCrop(
+            @PathVariable(value = "id") Long cropId, @Valid @RequestBody Crops cropDetails)
             throws ResourceNotFoundException {
-        Crop crop =
+        Crops crop =
                 cropRepository
                         .findById(cropId)
-                        .orElseThrow(() -> new ResourceNotFoundException("Crop not found on :: " + cropId));
+                        .orElseThrow(() -> new ResourceNotFoundException("Crop record not found for id: " + cropId));
         crop.setCropName(cropDetails.getCropName());
         crop.setCropDescription(cropDetails.getCropDescription());
         crop.setCropId(cropDetails.getCropId());
-        final Crop updatedCrop = cropRepository.save(crop);
+        final Crops updatedCrop = cropRepository.save(crop);
         return ResponseEntity.ok(updatedCrop);
     } // UPDATECROP(@PATHVARIABLE)
 
-    @DeleteMapping("/crops/delete/{id}")
-    public Map<String, Boolean> deleteCrop(@PathVariable(value = "id") Long cropId) throws Exception {
-        Crop crop =
+    @DeleteMapping("/crops/delete/{cropId}")
+    public Map<String, Boolean> deleteCrop(@PathVariable(value = "cropId") Long cropId) throws Exception {
+        Crops crop =
                 cropRepository
                         .findById(cropId)
-                        .orElseThrow(() -> new ResourceNotFoundException("Crop not found on :: " + cropId));
+                        .orElseThrow(() -> new ResourceNotFoundException("Crop record not found for id: " + cropId));
         cropRepository.delete(crop);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
     } // DELETECROP(@PATHVARIABLE)
-*/
+
     @GetMapping("/")
     public ResponseEntity<String> getHome() throws Exception{
         return ResponseEntity.ok("We are at home page.");
