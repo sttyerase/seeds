@@ -2,23 +2,29 @@ package com.dbmi.seeds.model;
 
 import com.sun.jdi.StringReference;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class Crops {
+@Table(name = "crops")
+public class Crop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long  cropId;
-    private String cropName;
-    private String cropDescription;
+    @Column(name = "crop_id")
+    private long     cropId;
+    @Column(name = "crop_name")
+    private String   cropName;
+    @Column(name = "crop_description")
+    private String   cropDescription;
+    @Column(name = "crop_icc_code")
+    private int      cropICCCode;
+    // TODO: Problems dealing with null value in ICC code column.
+    // TODO: How does Hibernate map Entity properties to database columns?
+    // TODO: Make all Entity primary keys LONG/BIGINT.
 
-    public Crops() {}
+    public Crop() {}
 
-    public Crops(long id, String name, String desc) {
+    public Crop(long id, String name, String desc) {
         this.cropId          = id;
         this.cropName        = name;
         this.cropDescription = desc;
@@ -47,4 +53,13 @@ public class Crops {
     public void setCropDescription(String cropDescription) {
         this.cropDescription = cropDescription;
     } // SETCODEDESCRIPTION(STRING)
+
+    public int getCropICCCode() {
+        return cropICCCode;
+    } // GETCROPICCCODE()
+
+    public void setCropICCCode(int cropICCCode) {
+        this.cropICCCode = cropICCCode;
+    } // SETCROPICCCODE(INT)
+
 } // CLASS

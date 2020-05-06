@@ -1,6 +1,6 @@
 package com.dbmi.seeds.controller;
 
-import com.dbmi.seeds.model.Crops;
+import com.dbmi.seeds.model.Crop;
 import com.dbmi.seeds.model.CropRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +19,14 @@ public class CropController {
     private CropRepository cropRepository;
 
     @GetMapping("/crops/all")
-    public Iterable<Crops> getAllCrops() {
+    public Iterable<Crop> getAllCrops() {
         return cropRepository.findAll();
     } // GETALLCROPS()
 
     @GetMapping("/crops/{cropId}")
-    public ResponseEntity<Crops> getCropsById(@PathVariable(value = "cropId") Long cropId)
+    public ResponseEntity<Crop> getCropsById(@PathVariable(value = "cropId") Long cropId)
             throws ResourceNotFoundException {
-        Crops myCrop =
+        Crop myCrop =
                 cropRepository
                         .findById(cropId)
                         .orElseThrow(() -> new ResourceNotFoundException("Crop information not found for id: " + cropId));
@@ -34,28 +34,28 @@ public class CropController {
     } // GETCROPSBYID(LONG)
 
     @PostMapping("/crops/new")
-    public Crops createCrop(@Valid @RequestBody Crops crop) {
+    public Crop createCrop(@Valid @RequestBody Crop crop) {
         return cropRepository.save(crop);
     } // CREATECROP(crop)
 
     @PutMapping("/crops/{id}")
-    public ResponseEntity<Crops> updateCrop(
-            @PathVariable(value = "id") Long cropId, @Valid @RequestBody Crops cropDetails)
+    public ResponseEntity<Crop> updateCrop(
+            @PathVariable(value = "id") Long cropId, @Valid @RequestBody Crop cropDetails)
             throws ResourceNotFoundException {
-        Crops crop =
+        Crop crop =
                 cropRepository
                         .findById(cropId)
                         .orElseThrow(() -> new ResourceNotFoundException("Crop record not found for id: " + cropId));
         crop.setCropName(cropDetails.getCropName());
         crop.setCropDescription(cropDetails.getCropDescription());
         crop.setCropId(cropDetails.getCropId());
-        final Crops updatedCrop = cropRepository.save(crop);
+        final Crop updatedCrop = cropRepository.save(crop);
         return ResponseEntity.ok(updatedCrop);
     } // UPDATECROP(@PATHVARIABLE)
 
     @DeleteMapping("/crops/delete/{cropId}")
     public Map<String, Boolean> deleteCrop(@PathVariable(value = "cropId") Long cropId) throws Exception {
-        Crops crop =
+        Crop crop =
                 cropRepository
                         .findById(cropId)
                         .orElseThrow(() -> new ResourceNotFoundException("Crop record not found for id: " + cropId));
