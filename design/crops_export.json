@@ -1,0 +1,12 @@
+[{"crop_id":1, "crop_name":"WHEAT", "crop_description":"WHEAT / triticum aestivum"},
+ {"crop_id":2, "crop_name":"MY CORN", "crop_description":"MY CORN / maize"},
+ {"crop_id":3, "crop_name":"SOYBEANS", "crop_description":"SOYBEANS / glycine max"},
+ {"crop_id":4, "crop_name":"SUGAR MAPLE", "crop_description":"SUGAR MAPLE / acer sacharum"},
+ {"crop_id":5, "crop_name":"OATS", "crop_description":"OATS / avena sativa"},
+ {"crop_id":7, "crop_name":"SWEETCLOVER", "crop_description":"SWEETCLOVER / melilotus"},
+ {"crop_id":8, "crop_name":"RED CLOVER", "crop_description":"RED CLOVER / trifolium praetense"},
+ {"crop_id":9, "crop_name":"SORGHUM", "crop_description":"SORGHUM / sorghum bicolor"},
+ {"crop_id":10, "crop_name":"ALFALFA", "crop_description":"ALFALFA / medicago sativa"},
+ {"crop_id":11, "crop_name":"BARLEY", "crop_description":"BARLEY / hordeum vulgare"},
+ {"crop_id":12, "crop_name":"BUCKWHEAT", "crop_description":"BUCKWHEAT / Fagopyrum esculentum"},
+ {"crop_id":13, "crop_name":"BLACKBERRIES", "crop_description":"BLACKBERRIES / rubus spp."}]

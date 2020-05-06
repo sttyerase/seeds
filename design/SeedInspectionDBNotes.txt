@@ -1,0 +1,12 @@
+INTERACTIONS:
+   reports:
+      - sample summary
+      - germination report
+      - purity report
+      - billing report
+      - producer report
+      - producer field list
+      - field inspection report
+
+
+
