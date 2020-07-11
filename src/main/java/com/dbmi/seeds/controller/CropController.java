@@ -4,6 +4,7 @@ import com.dbmi.seeds.model.Crop;
 import com.dbmi.seeds.model.CropRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,10 @@ public class CropController {
                 cropRepository
                         .findById(cropId)
                         .orElseThrow(() -> new ResourceNotFoundException("Crop information not found for id: " + cropId));
-        return ResponseEntity.ok().body(myCrop);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin","*");
+        ResponseEntity<Crop> theRE = new ResponseEntity<Crop>(myCrop,headers,HttpStatus.OK);
+        return theRE;
     } // GETCROPSBYID(LONG)
 
     @PostMapping("/crops/new")
