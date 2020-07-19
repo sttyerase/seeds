@@ -54,6 +54,7 @@ public class CropController {
         crop.setCropName(cropDetails.getCropName());
         crop.setCropDescription(cropDetails.getCropDescription());
         crop.setCropId(cropDetails.getCropId());
+        crop.setCropICCCode(cropDetails.getCropICCCode());
         final Crop updatedCrop = cropRepository.save(crop);
         return ResponseEntity.ok(updatedCrop);
     } // UPDATECROP(@PATHVARIABLE)
