@@ -4,7 +4,6 @@ import com.dbmi.seeds.model.Crop;
 import com.dbmi.seeds.model.CropRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +18,13 @@ public class CropController {
     @Autowired
     private CropRepository cropRepository;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/crops/all")
     public Iterable<Crop> getAllCrops() {
         return cropRepository.findAll();
     } // GETALLCROPS()
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/crops/{cropId}")
     public ResponseEntity<Crop> getCropsById(@PathVariable(value = "cropId") Long cropId)
             throws ResourceNotFoundException {
@@ -31,17 +32,17 @@ public class CropController {
                 cropRepository
                         .findById(cropId)
                         .orElseThrow(() -> new ResourceNotFoundException("Crop information not found for id: " + cropId));
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Access-Control-Allow-Origin","*");
-        ResponseEntity<Crop> theRE = new ResponseEntity<Crop>(myCrop,headers,HttpStatus.OK);
+        ResponseEntity<Crop> theRE = new ResponseEntity<Crop>(myCrop,HttpStatus.OK);
         return theRE;
     } // GETCROPSBYID(LONG)
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/crops/new")
     public Crop createCrop(@Valid @RequestBody Crop crop) {
         return cropRepository.save(crop);
     } // CREATECROP(crop)
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/crops/{id}")
     public ResponseEntity<Crop> updateCrop(
             @PathVariable(value = "id") Long cropId, @Valid @RequestBody Crop cropDetails)
@@ -57,6 +58,7 @@ public class CropController {
         return ResponseEntity.ok(updatedCrop);
     } // UPDATECROP(@PATHVARIABLE)
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/crops/delete/{cropId}")
     public Map<String, Boolean> deleteCrop(@PathVariable(value = "cropId") Long cropId) throws Exception {
         Crop crop =
@@ -77,6 +79,6 @@ public class CropController {
     @GetMapping("/error")
     public ResponseEntity<String> getError() throws Exception{
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("500 Internal server error.");
-    } // GETHOME()
+    } // GETERROR()
 
 } // CLASS
