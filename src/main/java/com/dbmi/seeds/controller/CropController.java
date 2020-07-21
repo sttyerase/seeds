@@ -12,19 +12,18 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/seedinspection")
 public class CropController {
     @Autowired
     private CropRepository cropRepository;
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/crops/all")
     public Iterable<Crop> getAllCrops() {
         return cropRepository.findAll();
     } // GETALLCROPS()
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/crops/{cropId}")
     public ResponseEntity<Crop> getCropsById(@PathVariable(value = "cropId") Long cropId)
             throws ResourceNotFoundException {
@@ -36,13 +35,11 @@ public class CropController {
         return theRE;
     } // GETCROPSBYID(LONG)
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/crops/new")
     public Crop createCrop(@Valid @RequestBody Crop crop) {
         return cropRepository.save(crop);
     } // CREATECROP(crop)
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/crops/{id}")
     public ResponseEntity<Crop> updateCrop(
             @PathVariable(value = "id") Long cropId, @Valid @RequestBody Crop cropDetails)
@@ -59,7 +56,6 @@ public class CropController {
         return ResponseEntity.ok(updatedCrop);
     } // UPDATECROP(@PATHVARIABLE)
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/crops/delete/{cropId}")
     public Map<String, Boolean> deleteCrop(@PathVariable(value = "cropId") Long cropId) throws Exception {
         Crop crop =
