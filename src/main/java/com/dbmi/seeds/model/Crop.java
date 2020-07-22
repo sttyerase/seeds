@@ -1,7 +1,5 @@
 package com.dbmi.seeds.model;
 
-import com.sun.jdi.StringReference;
-
 import javax.persistence.*;
 
 @Entity
@@ -21,13 +19,15 @@ public class Crop {
     // TODO: Problems dealing with null value in ICC code column.
     // TODO: How does Hibernate map Entity properties to database columns?
     // TODO: Make all Entity primary keys LONG/BIGINT.
+    // TODO: Update cropICCCode to long / BIGINT.
 
     public Crop() {}
 
-    public Crop(long id, String name, String desc) {
+    public Crop(long id, String name, String desc, int icode) {
         this.cropId          = id;
         this.cropName        = name;
         this.cropDescription = desc;
+        this.cropICCCode     = icode;
     } // CONSTRUCTOR(INT,STRING,STRING)
 
     public long getCropId() {
