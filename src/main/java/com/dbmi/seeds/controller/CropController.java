@@ -20,10 +20,16 @@ public class CropController {
     private CropRepository cropRepository;
 
     // GET METHODS
+    @GetMapping("/crops/rowcount")
+    public ResponseEntity<Long> getRowCount() {
+        Long tableRows =  cropRepository.count();
+        return ResponseEntity.ok(tableRows);
+    } // GETHOME()
+
     @GetMapping("/crops/all")
     public Iterable<Crop> findAllCrops() {
         return cropRepository.findAll();
-    } // GETALLCROPS()
+    } // FINDALLCROPS()
 
     @GetMapping("/crops/id/{cropId}")
     public ResponseEntity<Crop> getCropsById(@PathVariable(value = "cropId") Long cropId)
@@ -33,15 +39,15 @@ public class CropController {
                         .findById(cropId)
                         .orElseThrow(() -> new ResourceNotFoundException("Crop information not found for id: " + cropId));
         return new ResponseEntity<Crop>(myCrop,HttpStatus.OK);
-    } // GETCROPSBYID(LONG)
+    } // FINDCROPSBYID(LONG)
 
     @GetMapping("/")
-    public ResponseEntity<String> getHome() throws Exception {
+    public ResponseEntity<String> getHome() {
         return ResponseEntity.ok("We are at home page.");
     } // GETHOME()
 
     @GetMapping("/error")
-    public ResponseEntity<String> getError() throws Exception {
+    public ResponseEntity<String> getError() {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("500 Internal server error.");
     } // GETERROR()
 
