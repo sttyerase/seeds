@@ -26,8 +26,7 @@ Use RAW and JSON in Postman for the body content to send with the api request fo
 POST and PUT with the same id in the JSON packet produce the same result by updating the existing record!!!!!
 POST ignores "spurious" inputs in the JSON; inserts known columns/key-values anyway.
 
-PUT fails to update ICC code value.  However, POST update succeeds.
-
+PUT fails to update ICC code value.  However, POST update succeeds. ** RESOLVED: added missing statement to code **
 ==========================================================================================================================================
 ==========================================================================================================================================
 ==========================================================================================================================================
