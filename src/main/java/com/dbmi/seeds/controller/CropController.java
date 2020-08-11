@@ -41,16 +41,6 @@ public class CropController {
         return new ResponseEntity<Crop>(myCrop,HttpStatus.OK);
     } // FINDCROPSBYID(LONG)
 
-    @GetMapping("/")
-    public ResponseEntity<String> getHome() {
-        return ResponseEntity.ok("We are at home page.");
-    } // GETHOME()
-
-    @GetMapping("/error")
-    public ResponseEntity<String> getError() {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("500 Internal server error.");
-    } // GETERROR()
-
     // POST METHODS
     @PostMapping("/crops/new")
     public Crop createCrop(@Valid @RequestBody Crop crop) {
@@ -88,3 +78,5 @@ public class CropController {
     } // DELETECROP(@PATHVARIABLE)
 
 } // CLASS
+
+// TODO: @GETMAPPING TO GET CROP BY NAME
