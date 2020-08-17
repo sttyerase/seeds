@@ -48,9 +48,9 @@ public class CropController {
     } // CREATECROP(crop)
 
     // PUT METHODS
-    @PutMapping("/crops/{id}")
+    @PutMapping("/crops/update/{cropId}")
     public ResponseEntity<Crop> updateCrop(
-            @PathVariable(value = "id") Long cropId, @Valid @RequestBody Crop cropDetails)
+            @PathVariable(value = "cropId") Long cropId, @Valid @RequestBody Crop cropDetails)
             throws ResourceNotFoundException {
         Crop crop =
                 cropRepository

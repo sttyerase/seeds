@@ -48,9 +48,9 @@ public class VarietyController {
     } // CREATEVARIETY(variety)
 
     // PUT METHODS
-    @PutMapping("/varieties/{id}")
+    @PutMapping("/varieties/update/{varietyId}")
     public ResponseEntity<Variety> updateVariety(
-            @PathVariable(value = "id") Long varietyId, @Valid @RequestBody Variety varietyDetails)
+            @PathVariable(value = "varietyId") Long varietyId, @Valid @RequestBody Variety varietyDetails)
             throws ResourceNotFoundException {
         Variety variety =
                 varietyRepository
