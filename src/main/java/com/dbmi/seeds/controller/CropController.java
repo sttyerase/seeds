@@ -78,5 +78,3 @@ public class CropController {
     } // DELETECROP(@PATHVARIABLE)
 
 } // CLASS
-
-// TODO: @GETMAPPING TO GET CROP BY NAME

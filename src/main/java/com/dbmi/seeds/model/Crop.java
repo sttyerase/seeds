@@ -16,10 +16,6 @@ public class Crop {
     private String   cropDescription;
     @Column(name = "crop_icc_code")
     private int      cropICCCode;
-    // TODO: Problems dealing with null value in ICC code column.
-    // TODO: How does Hibernate map Entity properties to database columns?
-    // TODO: Make all Entity primary keys LONG/BIGINT.
-    // TODO: Update cropICCCode to long / BIGINT.
 
     public Crop() {}
 

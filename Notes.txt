@@ -30,3 +30,7 @@ PUT fails to update ICC code value.  However, POST update succeeds. ** RESOLVED:
 ==========================================================================================================================================
 ==========================================================================================================================================
 ==========================================================================================================================================
+// TODO: @GETMAPPING TO GET CROP BY NAME
+// TODO: Problems dealing with null value in ICC code column.
+// TODO: How does Hibernate map Entity properties to database columns?
+// TODO: Make all Entity primary keys LONG/BIGINT. ????
