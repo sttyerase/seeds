@@ -33,3 +33,5 @@ build/
 ### VS Code ###
 .vscode/
 *.bak
+/cp.txt
+/cp_sort.txt

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -38,6 +39,19 @@ public class CropController {
                 cropRepository
                         .findById(cropId)
                         .orElseThrow(() -> new ResourceNotFoundException("Crop information not found for id: " + cropId));
+        return new ResponseEntity<Crop>(myCrop,HttpStatus.OK);
+    } // FINDCROPSBYID(LONG)
+
+    @GetMapping("/crops/name/{cropName}")
+    public ResponseEntity<Crop> getCropsByName(@PathVariable(value = "cropName") String cropName)
+            throws ResourceNotFoundException {
+        Crop myCrop;
+        Optional<Crop> cropOptional = cropRepository.findByCropName(cropName);
+        if(cropOptional.isPresent()){
+            myCrop = cropOptional.get();
+        } else {
+            throw new ResourceNotFoundException("Unable to locate crop: " + cropName);
+        }
         return new ResponseEntity<Crop>(myCrop,HttpStatus.OK);
     } // FINDCROPSBYID(LONG)
 
