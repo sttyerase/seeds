@@ -21,7 +21,7 @@ USE `SeedInspectionDB` ;
 DROP TABLE IF EXISTS `SeedInspectionDB`.`producers` ;
 
 CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`producers` (
-  `producer_id` INT NOT NULL,
+  `producer_id` BIGINT NOT NULL,
   `producer_name` VARCHAR(200) NULL,
   `producer_address1` VARCHAR(200) NULL,
   `producer_address2` VARCHAR(200) NULL,
@@ -41,9 +41,11 @@ DROP TABLE IF EXISTS `SeedInspectionDB`.`crops` ;
 
 CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`crops` (
   `crop_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `crop_name` VARCHAR(200) NULL,
+  `crop_name` VARCHAR(200) NOT NULL,
   `crop_description` VARCHAR(2000) NULL,
-  `crop_icc_code` INT NULL,
+  `crop_icc_code` INT NOT NULL DEFAULT 0,
+  `crop_create_date` DATE NULL,
+  `crop_change_date` DATE NULL,
   PRIMARY KEY (`crop_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = ascii;
@@ -57,19 +59,19 @@ CREATE UNIQUE INDEX `crop_name_UNIQUE` ON `SeedInspectionDB`.`crops` (`crop_name
 DROP TABLE IF EXISTS `SeedInspectionDB`.`varieties` ;
 
 CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`varieties` (
-  `variety_id` INT NOT NULL AUTO_INCREMENT,
+  `variety_id` BIGINT NOT NULL AUTO_INCREMENT,
   `variety_name` VARCHAR(100) NOT NULL,
   `variety_crop_id` BIGINT NOT NULL,
   `variety_description` VARCHAR(2000) NULL,
   PRIMARY KEY (`variety_id`),
-  CONSTRAINT `fk_varieties_crops1`
+  CONSTRAINT `fk_varieties_crops`
     FOREIGN KEY (`variety_crop_id`)
     REFERENCES `SeedInspectionDB`.`crops` (`crop_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_varieties_crops1_idx` ON `SeedInspectionDB`.`varieties` (`variety_crop_id` ASC) VISIBLE;
+CREATE INDEX `fk_varieties_crops_idx` ON `SeedInspectionDB`.`varieties` (`variety_crop_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
@@ -78,11 +80,11 @@ CREATE INDEX `fk_varieties_crops1_idx` ON `SeedInspectionDB`.`varieties` (`varie
 DROP TABLE IF EXISTS `SeedInspectionDB`.`samples` ;
 
 CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`samples` (
-  `sample_id` INT NOT NULL,
-  `sample_crop_id` INT NOT NULL,
+  `sample_id` BIGINT NOT NULL,
+  `sample_crop_id` BIGINT NOT NULL,
   `sample_entry_date` DATE NOT NULL,
-  `sample_producer_id` INT NOT NULL,
-  `sample_variety_id` INT NOT NULL,
+  `sample_producer_id` BIGINT NOT NULL,
+  `sample_variety_id` BIGINT NOT NULL,
   `sample_lot_id` VARCHAR(45) NULL,
   PRIMARY KEY (`sample_id`, `sample_variety_id`),
   CONSTRAINT `fk_samples_producers`
@@ -94,12 +96,19 @@ CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`samples` (
     FOREIGN KEY (`sample_variety_id`)
     REFERENCES `SeedInspectionDB`.`varieties` (`variety_id`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_samples_crops`
+    FOREIGN KEY (`sample_crop_id`)
+    REFERENCES `SeedInspectionDB`.`crops` (`crop_id`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_samples_producers1_idx` ON `SeedInspectionDB`.`samples` (`sample_producer_id` ASC) VISIBLE;
 
 CREATE INDEX `fk_samples_varieties1_idx` ON `SeedInspectionDB`.`samples` (`sample_variety_id` ASC) VISIBLE;
+
+CREATE INDEX `fk_samples_crops_idx` ON `SeedInspectionDB`.`samples` (`sample_crop_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
@@ -113,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`germinations` (
   `percent_dead` DOUBLE NOT NULL DEFAULT 0,
   `percent_weak` DOUBLE NOT NULL DEFAULT 0,
   `germination_comments` VARCHAR(2000) NULL,
-  `germination_sample_id` INT NOT NULL,
+  `germination_sample_id` BIGINT NOT NULL,
   PRIMARY KEY (`germination_id`),
   CONSTRAINT `fk_germinations_samples`
     FOREIGN KEY (`germination_sample_id`)
@@ -131,12 +140,12 @@ CREATE INDEX `fk_germinations_samples1_idx` ON `SeedInspectionDB`.`germinations`
 DROP TABLE IF EXISTS `SeedInspectionDB`.`purities` ;
 
 CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`purities` (
-  `purity_id` INT NOT NULL,
-  `purity_sample_id` INT NULL,
+  `purity_id` BIGINT NOT NULL,
+  `purity_sample_id` BIGINT NULL,
   `pure_seed` DOUBLE ZEROFILL NOT NULL,
   `foreign_matter` DOUBLE ZEROFILL NOT NULL,
   PRIMARY KEY (`purity_id`),
-  CONSTRAINT `fk_purities_samples1`
+  CONSTRAINT `fk_purities_samples`
     FOREIGN KEY (`purity_sample_id`)
     REFERENCES `SeedInspectionDB`.`samples` (`sample_id`)
     ON DELETE NO ACTION
@@ -153,9 +162,9 @@ CREATE INDEX `fk_purities_samples1_idx` ON `SeedInspectionDB`.`purities` (`purit
 DROP TABLE IF EXISTS `SeedInspectionDB`.`producer_privacy_keys` ;
 
 CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`producer_privacy_keys` (
-  `producer_pkkeys_id` INT NOT NULL,
+  `producer_pkkeys_id` BIGINT NOT NULL,
   `producer_pkkeys_key` VARCHAR(2048) NOT NULL,
-  `producer_pkkeys_producer_id` INT NOT NULL,
+  `producer_pkkeys_producer_id` BIGINT NOT NULL,
   PRIMARY KEY (`producer_pkkeys_id`),
   CONSTRAINT `fk_producer_pkkeys_producers1`
     FOREIGN KEY (`producer_pkkeys_producer_id`)
@@ -174,10 +183,10 @@ CREATE INDEX `fk_producer_pkkeys_producers1_idx` ON `SeedInspectionDB`.`producer
 DROP TABLE IF EXISTS `SeedInspectionDB`.`fields` ;
 
 CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`fields` (
-  `field_id` INT NOT NULL,
+  `field_id` BIGINT NOT NULL,
   `field_location` VARCHAR(1000) NULL,
-  `field_producer_id` INT NOT NULL,
-  `field_variety_id` INT NOT NULL,
+  `field_producer_id` BIGINT NOT NULL,
+  `field_variety_id` BIGINT NOT NULL,
   `field_inspection_date` DATE NULL,
   `field_inspection_results` VARCHAR(100) NULL,
   `field_inspection_comments` VARCHAR(2000) NULL,
@@ -206,11 +215,11 @@ CREATE INDEX `fk_fields_varieties1_idx` ON `SeedInspectionDB`.`fields` (`field_v
 DROP TABLE IF EXISTS `SeedInspectionDB`.`fieldinspections` ;
 
 CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`fieldinspections` (
-  `fieldinspection_id` INT NOT NULL AUTO_INCREMENT,
+  `fieldinspection_id` BIGINT NOT NULL AUTO_INCREMENT,
   `fieldinspection_pass` VARCHAR(10) NULL,
   `field_inspection_results` VARCHAR(500) NULL,
-  `fieldinspection_field_id` INT NOT NULL,
-  `fieldinspection_application_number` INT NOT NULL,
+  `fieldinspection_field_id` BIGINT NOT NULL,
+  `fieldinspection_application_number` BIGINT NOT NULL,
   PRIMARY KEY (`fieldinspection_id`),
   CONSTRAINT `fk_fieldinspections_fields`
     FOREIGN KEY (`fieldinspection_field_id`)
@@ -220,6 +229,20 @@ CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`fieldinspections` (
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_fieldinspections_fields_idx` ON `SeedInspectionDB`.`fieldinspections` (`fieldinspection_field_id` ASC) VISIBLE;
+
+
+-- -----------------------------------------------------
+-- Table `SeedInspectionDB`.`application_audits`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SeedInspectionDB`.`application_audits` ;
+
+CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`application_audits` (
+  `audit_entry_id` INT NOT NULL,
+  `audit_entry_table` VARCHAR(45) NOT NULL,
+  `audit_entry_time` DATE NOT NULL,
+  `audit_entry_agent` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`audit_entry_id`))
+ENGINE = InnoDB;
 
 SET SQL_MODE = '';
 DROP USER IF EXISTS seedmgr;
