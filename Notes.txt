@@ -10,10 +10,13 @@
 RESTFUL SPRING BOOT API:
 Intellij --> Create new project -->   Spring Initializr (left column) --> next
 establish project settings --> next --> select:
-   - Developer Tools --> Spring Boot Dev Tools / ?Lombok?
+   - Developer Tools --> Spring Boot Dev Tools / ?Lombok?   // LOMBOK not necessary.
    - Web --> Spring Web
    - SQL --> Spring Data JPA
    - Ops --> Spring Boot Actuator
+
+Using Postman to test the API return values:
+Use RAW and JSON in Postman for the body content to send with the api request for POST and PUT requesets.
 
 This code uses Spring @RestController annotation, which marks the class as a controller where every method returns a *domain object* instead of a view.
 
@@ -22,17 +25,18 @@ name in the database. Added the @Table(name = actual_table_name) annotation and 
 
 For sequence issue: use strategy = AUTO and send the value -1 in the JSON request body.
 
-Use RAW and JSON in Postman for the body content to send with the api request for POST and PUT requesets.
-
 POST and PUT with the same id in the JSON packet produce the same result by updating the existing record.
-POST ignores "spurious" inputs in the JSON; inserts known columns/key-values anyway.
+POST ignores "spurious" inputs in the JSON; inserts known columns/key-values anyway??
 
 PUT fails to update ICC code value.  However, POST update succeeds. ** RESOLVED: added missing statement to code **
 
+Changed javax.persistence.GenerationType to IDENTITY from AUTO per this article:
+        https://stackoverflow.com/questions/45688479/org-hibernate-id-enhanced-tablestructure-could-not-read-a-hi-value
+
+Customer/Producer data: links to other systems??
 ==========================================================================================================================================
 ==========================================================================================================================================
 ==========================================================================================================================================
-// TODO: @GETMAPPING TO GET CROP BY NAME
-// TODO: Problems dealing with null value in ICC code column.
+// TODO: Problems dealing with null value in ICC code column??
 // TODO: How does Hibernate map Entity properties to database columns?
 // TODO: Make all Entity primary keys LONG/BIGINT. ????
