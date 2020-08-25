@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Variety {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "variety_id")
     private long     varietyId;
     @Column(name = "variety_name")
@@ -15,11 +15,11 @@ public class Variety {
     @Column(name = "variety_description")
     private String   varietyDescription;
     @Column(name = "variety_crop_id")
-    private int      varietyCropId;
+    private long      varietyCropId;
 
     public Variety() {}
 
-    public Variety(long id, String name, String desc, int cropId) {
+    public Variety(long id, String name, String desc, long cropId) {
         this.varietyId          = id;
         this.varietyName        = name;
         this.varietyDescription = desc;
@@ -50,11 +50,11 @@ public class Variety {
         this.varietyDescription = varietyDescription;
     } // SETCODEDESCRIPTION(STRING)
 
-    public int getVarietyCropId() {
+    public long getVarietyCropId() {
         return varietyCropId;
     }
 
-    public void setVarietyCropId(int varietyCropId) {
+    public void setVarietyCropId(long varietyCropId) {
         this.varietyCropId = varietyCropId;
     }
 

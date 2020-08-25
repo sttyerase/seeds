@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -40,6 +41,19 @@ public class VarietyController {
                         .orElseThrow(() -> new ResourceNotFoundException("Variety information not found for id: " + varietyId));
         return new ResponseEntity<Variety>(myVariety,HttpStatus.OK);
     } // FINDVARIETIESBYID(LONG)
+
+    @GetMapping("/varieties/name/{varietyName}")
+    public ResponseEntity<Variety> getVarietiesByName(@PathVariable(value = "varietyName") String varietyName)
+            throws ResourceNotFoundException {
+        Variety myVariety;
+        Optional<Variety> varietyOptional = varietyRepository.findByVarietyName(varietyName);
+        if(varietyOptional.isPresent()){
+            myVariety = varietyOptional.get();
+        } else {
+            throw new ResourceNotFoundException("Unable to locate variety: " + varietyName);
+        } // IF-ELSE
+        return new ResponseEntity<Variety>(myVariety,HttpStatus.OK);
+    } // FINDCROPSBYID(LONG)
 
     // POST METHODS
     @PostMapping("/varieties/new")

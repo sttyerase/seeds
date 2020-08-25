@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Crop {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "crop_id")
     private long     cropId;
     @Column(name = "crop_name")
