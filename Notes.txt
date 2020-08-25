@@ -14,6 +14,7 @@ establish project settings --> next --> select:
    - Web --> Spring Web
    - SQL --> Spring Data JPA
    - Ops --> Spring Boot Actuator
+
 This code uses Spring @RestController annotation, which marks the class as a controller where every method returns a *domain object* instead of a view.
 
 stackoverflow: "Was facing same issue for a while and figured out that the problem was due to the Table name being different from the class(or Entity)
@@ -23,11 +24,15 @@ For sequence issue: use strategy = AUTO and send the value -1 in the JSON reques
 
 Use RAW and JSON in Postman for the body content to send with the api request for POST and PUT requesets.
 
-POST and PUT with the same id in the JSON packet produce the same result by updating the existing record!!!!!
+POST and PUT with the same id in the JSON packet produce the same result by updating the existing record.
 POST ignores "spurious" inputs in the JSON; inserts known columns/key-values anyway.
 
-PUT fails to update ICC code value.  However, POST update succeeds.
+PUT fails to update ICC code value.  However, POST update succeeds. ** RESOLVED: added missing statement to code **
 
 ==========================================================================================================================================
 ==========================================================================================================================================
 ==========================================================================================================================================
+// TODO: @GETMAPPING TO GET CROP BY NAME
+// TODO: Problems dealing with null value in ICC code column.
+// TODO: How does Hibernate map Entity properties to database columns?
+// TODO: Make all Entity primary keys LONG/BIGINT. ????

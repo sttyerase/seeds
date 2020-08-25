@@ -11,36 +11,60 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/seedinspection")
 public class CropController {
     @Autowired
     private CropRepository cropRepository;
 
-    @GetMapping("/crops/all")
-    public Iterable<Crop> getAllCrops() {
-        return cropRepository.findAll();
-    } // GETALLCROPS()
+    // GET METHODS
+    @GetMapping("/crops/rowcount")
+    public ResponseEntity<Long> getRowCount() {
+        Long tableRows =  cropRepository.count();
+        return ResponseEntity.ok(tableRows);
+    } // GETHOME()
 
-    @GetMapping("/crops/{cropId}")
+    @GetMapping("/crops/all")
+    public Iterable<Crop> findAllCrops() {
+        return cropRepository.findAll();
+    } // FINDALLCROPS()
+
+    @GetMapping("/crops/id/{cropId}")
     public ResponseEntity<Crop> getCropsById(@PathVariable(value = "cropId") Long cropId)
             throws ResourceNotFoundException {
         Crop myCrop =
                 cropRepository
                         .findById(cropId)
                         .orElseThrow(() -> new ResourceNotFoundException("Crop information not found for id: " + cropId));
-        return ResponseEntity.ok().body(myCrop);
-    } // GETCROPSBYID(LONG)
+        return new ResponseEntity<Crop>(myCrop,HttpStatus.OK);
+    } // FINDCROPSBYID(LONG)
 
+    @GetMapping("/crops/name/{cropName}")
+    public ResponseEntity<Crop> getCropsByName(@PathVariable(value = "cropName") String cropName)
+            throws ResourceNotFoundException {
+        Crop myCrop;
+        Optional<Crop> cropOptional = cropRepository.findByCropName(cropName);
+        if(cropOptional.isPresent()){
+            myCrop = cropOptional.get();
+        } else {
+            throw new ResourceNotFoundException("Unable to locate crop: " + cropName);
+        } // IF-ELSE
+        return new ResponseEntity<Crop>(myCrop,HttpStatus.OK);
+    } // FINDCROPSBYID(LONG)
+
+    // POST METHODS
     @PostMapping("/crops/new")
     public Crop createCrop(@Valid @RequestBody Crop crop) {
         return cropRepository.save(crop);
     } // CREATECROP(crop)
 
-    @PutMapping("/crops/{id}")
+    // PUT METHODS
+    @PutMapping("/crops/update/{cropId}")
     public ResponseEntity<Crop> updateCrop(
-            @PathVariable(value = "id") Long cropId, @Valid @RequestBody Crop cropDetails)
+            @PathVariable(value = "cropId") Long cropId, @Valid @RequestBody Crop cropDetails)
             throws ResourceNotFoundException {
         Crop crop =
                 cropRepository
@@ -49,10 +73,12 @@ public class CropController {
         crop.setCropName(cropDetails.getCropName());
         crop.setCropDescription(cropDetails.getCropDescription());
         crop.setCropId(cropDetails.getCropId());
+        crop.setCropICCCode(cropDetails.getCropICCCode());
         final Crop updatedCrop = cropRepository.save(crop);
         return ResponseEntity.ok(updatedCrop);
     } // UPDATECROP(@PATHVARIABLE)
 
+    // DELETE METHODS
     @DeleteMapping("/crops/delete/{cropId}")
     public Map<String, Boolean> deleteCrop(@PathVariable(value = "cropId") Long cropId) throws Exception {
         Crop crop =
@@ -64,15 +90,5 @@ public class CropController {
         response.put("deleted", Boolean.TRUE);
         return response;
     } // DELETECROP(@PATHVARIABLE)
-
-    @GetMapping("/")
-    public ResponseEntity<String> getHome() throws Exception{
-        return ResponseEntity.ok("We are at home page.");
-    } // GETHOME()
-
-    @GetMapping("/error")
-    public ResponseEntity<String> getError() throws Exception{
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("500 Internal server error.");
-    } // GETHOME()
 
 } // CLASS

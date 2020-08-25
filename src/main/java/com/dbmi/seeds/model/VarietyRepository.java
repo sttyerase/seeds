@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CropRepository extends CrudRepository<Crop, Long> {
-    Optional<Crop> findByCropName(String cropName);
+public interface VarietyRepository extends CrudRepository<Variety, Long> {
+    Optional<Variety> findByVarietyName(String varietyName);
 } // INTERFACE
