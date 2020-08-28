@@ -2,7 +2,6 @@ package com.dbmi.seeds.controller;
 
 import com.dbmi.seeds.model.Crop;
 import com.dbmi.seeds.model.CropRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +16,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/seedinspection")
 public class CropController {
-    @Autowired
     private CropRepository cropRepository;
+
+    @Autowired
+    CropController(CropRepository myRepo){
+        super();
+        this.cropRepository = myRepo;
+    } // DEFAULT CONSTRUCTOR
 
     // GET METHODS
     @GetMapping("/crops/rowcount")
