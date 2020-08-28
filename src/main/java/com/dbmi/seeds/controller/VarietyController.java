@@ -16,8 +16,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/seedinspection")
 public class VarietyController {
+    private final VarietyRepository varietyRepository;
+
     @Autowired
-    private VarietyRepository varietyRepository;
+    VarietyController(VarietyRepository myRepo){
+        super();
+        this.varietyRepository = myRepo;
+    } // DEFAULT CONSTRUCTOR
 
     // GET METHODS
     @GetMapping("/varieties/rowcount")
