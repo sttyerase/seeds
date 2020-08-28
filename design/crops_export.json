@@ -57,4 +57,8 @@
  {"crop_id":96, "crop_name":"RAPESEED", "crop_description":"RAPESEED (colza) / Brassica napus", "crop_icc_code":435},
  {"crop_id":117, "crop_name":"TOMATO", "crop_description":"TOMATO / Lycopersicon esculentum", "crop_icc_code":223},
  {"crop_id":118, "crop_name":"TRITICALE", "crop_description":"TRITICALE / Hybrid of Triticum aestivum and Secale cereale", "crop_icc_code":17},
- {"crop_id":119, "crop_name":"TIMOTHY", "crop_description":"TIMOTHY / Phleum pratense", "crop_icc_code":911}]
+ {"crop_id":119, "crop_name":"TIMOTHY", "crop_description":"TIMOTHY / Phleum pratense", "crop_icc_code":911},
+ {"crop_id":120, "crop_name":"STRAWBERRIES", "crop_description":"STRAWBERRIES / Fragaria spp. (over 30 sp.)", "crop_icc_code":345},
+ {"crop_id":121, "crop_name":"SAINFOIN", "crop_description":"SAINFOIN / Onobrychis viciifolia", "crop_icc_code":911},
+ {"crop_id":123, "crop_name":"SPINACH", "crop_description":"SPINACH / Spinacia oleracia", "crop_icc_code":216},
+ {"crop_id":124, "crop_name":"SAFFLOWER", "crop_description":"SAFFLOWER / Carthamus tinctorius", "crop_icc_code":436}]

@@ -3,7 +3,7 @@
  {"variety_id":3, "variety_name":"HART", "variety_crop_id":78, "variety_description":"HART / soft red winter, awned"},
  {"variety_id":4, "variety_name":"OGLE", "variety_crop_id":5, "variety_description":"OGLE / lodging resistant"},
  {"variety_id":7, "variety_name":"RESNIK", "variety_crop_id":3, "variety_description":"RESNIK / intermediate 3.4 Rps1k"},
- {"variety_id":9, "variety_name":"SPOONER", "variety_crop_id":17, "variety_description":"SPOONER / who cares ??"},
+ {"variety_id":9, "variety_name":"SPOONER", "variety_crop_id":17, "variety_description":"SPOONER / winter rye (diploid), winter hardy"},
  {"variety_id":10, "variety_name":"BRANSON", "variety_crop_id":78, "variety_description":"BRANSON / soft red winter, awnletted"},
  {"variety_id":11, "variety_name":"KOKOSING", "variety_crop_id":78, "variety_description":"KOKOSING / soft red winter, awnletted"},
  {"variety_id":12, "variety_name":"PUFFIN", "variety_crop_id":11, "variety_description":"PUFFIN / winter barley"},
@@ -17,4 +17,6 @@
  {"variety_id":20, "variety_name":"WALTHAM 21", "variety_crop_id":51, "variety_description":"WALTHAM 21 / Heirloom, deep green color, spring and fall"},
  {"variety_id":21, "variety_name":"PURPLE SPROUTING", "variety_crop_id":51, "variety_description":"PURPLE SPROUTING / Heirloom, deep purple sprouts"},
  {"variety_id":22, "variety_name":"DETROIT DARK RED", "variety_crop_id":31, "variety_description":"DETROIT DARK RED / heirloom, sweet flavor"},
- {"variety_id":23, "variety_name":"DETROIT SUPREME", "variety_crop_id":31, "variety_description":"DETROIT SUPREME / heirloom, disease resistant"}]
+ {"variety_id":23, "variety_name":"DETROIT SUPREME", "variety_crop_id":31, "variety_description":"DETROIT SUPREME / heirloom, disease resistant"},
+ {"variety_id":24, "variety_name":"WYANDOT 14", "variety_crop_id":3, "variety_description":"WYANDOT 14 / Rps3a, large seeds"},
+ {"variety_id":25, "variety_name":"DENNISON", "variety_crop_id":3, "variety_description":"DENNISON / Thinline, Rps1k/Rps3a, sclerotinia susceptible"}]

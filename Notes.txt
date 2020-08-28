@@ -39,4 +39,3 @@ Customer/Producer data: links to other systems??
 ==========================================================================================================================================
 // TODO: Problems dealing with null value in ICC code column??
 // TODO: How does Hibernate map Entity properties to database columns?
-// TODO: Make all Entity primary keys LONG/BIGINT. ????

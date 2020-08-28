@@ -23,6 +23,12 @@ DROP TABLE IF EXISTS `SeedInspectionDB`.`producers` ;
 CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`producers` (
   `producer_id` BIGINT NOT NULL,
   `producer_short_name` VARCHAR(50) NULL,
+  `producer_name` VARCHAR(45) NULL,
+  `producer_address1` VARCHAR(45) NULL,
+  `producer_address2` VARCHAR(45) NULL,
+  `producer_city` VARCHAR(45) NULL,
+  `producer_state` VARCHAR(2) NULL,
+  `producer_zip` VARCHAR(10) NULL,
   PRIMARY KEY (`producer_id`))
 ENGINE = InnoDB;
 
@@ -77,12 +83,11 @@ DROP TABLE IF EXISTS `SeedInspectionDB`.`samples` ;
 
 CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`samples` (
   `sample_id` BIGINT NOT NULL,
-  `sample_crop_id` BIGINT NOT NULL,
   `sample_entry_date` DATE NOT NULL,
   `sample_producer_id` BIGINT NOT NULL,
   `sample_variety_id` BIGINT NOT NULL,
   `sample_lot_id` VARCHAR(45) NULL,
-  PRIMARY KEY (`sample_id`, `sample_variety_id`),
+  PRIMARY KEY (`sample_id`),
   CONSTRAINT `fk_samples_producers`
     FOREIGN KEY (`sample_producer_id`)
     REFERENCES `SeedInspectionDB`.`producers` (`producer_id`)
@@ -92,19 +97,12 @@ CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`samples` (
     FOREIGN KEY (`sample_variety_id`)
     REFERENCES `SeedInspectionDB`.`varieties` (`variety_id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_samples_crops`
-    FOREIGN KEY (`sample_crop_id`)
-    REFERENCES `SeedInspectionDB`.`crops` (`crop_id`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_samples_producers1_idx` ON `SeedInspectionDB`.`samples` (`sample_producer_id` ASC) VISIBLE;
 
 CREATE INDEX `fk_samples_varieties1_idx` ON `SeedInspectionDB`.`samples` (`sample_variety_id` ASC) VISIBLE;
-
-CREATE INDEX `fk_samples_crops_idx` ON `SeedInspectionDB`.`samples` (`sample_crop_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
@@ -242,30 +240,25 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SeedInspectionDB`.`producer_details`
+-- Table `SeedInspectionDB`.`producer_contacts`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `SeedInspectionDB`.`producer_details` ;
+DROP TABLE IF EXISTS `SeedInspectionDB`.`producer_contacts` ;
 
-CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`producer_details` (
-  `producer_detail_id` BIGINT NOT NULL,
-  `producer_detail_producer_id` BIGINT NOT NULL,
-  `pd_name` VARCHAR(45) NULL,
-  `pd_address1` VARCHAR(45) NULL,
-  `pd_address2` VARCHAR(45) NULL,
-  `pd_state` VARCHAR(45) NULL,
-  `pd_zip` VARCHAR(45) NULL,
-  `pd_phone1` VARCHAR(45) NULL,
-  `pd_phone2` VARCHAR(45) NULL,
-  `pd_site_image` LONGBLOB NULL,
-  PRIMARY KEY (`producer_detail_id`),
-  CONSTRAINT `fk_producer_details_producers1`
-    FOREIGN KEY (`producer_detail_producer_id`)
+CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`producer_contacts` (
+  `producer_contact_id` INT NOT NULL,
+  `producer_contact_type` VARCHAR(45) NOT NULL,
+  `producer_contact_person` VARCHAR(45) NULL,
+  `producer_contact_information` VARCHAR(200) NULL,
+  `producer_contact_producer_id` BIGINT NOT NULL,
+  PRIMARY KEY (`producer_contact_id`),
+  CONSTRAINT `fk_producer_contacts_producers`
+    FOREIGN KEY (`producer_contact_producer_id`)
     REFERENCES `SeedInspectionDB`.`producers` (`producer_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_producer_details_producers1_idx` ON `SeedInspectionDB`.`producer_details` (`producer_detail_producer_id` ASC) VISIBLE;
+CREATE INDEX `fk_producer_contacts_producers_idx` ON `SeedInspectionDB`.`producer_contacts` (`producer_contact_producer_id` ASC) VISIBLE;
 
 SET SQL_MODE = '';
 DROP USER IF EXISTS seedmgr;
