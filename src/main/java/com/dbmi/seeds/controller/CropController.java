@@ -31,12 +31,12 @@ public class CropController {
         return ResponseEntity.ok(tableRows);
     } // GETHOME()
 
-    @GetMapping("/crops/all")
+    @GetMapping("/crops/find/all")
     public Iterable<Crop> findAllCrops() {
         return cropRepository.findAll();
     } // FINDALLCROPS()
 
-    @GetMapping("/crops/id/{cropId}")
+    @GetMapping("/crops/find/id/{cropId}")
     public ResponseEntity<Crop> getCropsById(@PathVariable(value = "cropId") Long cropId)
             throws ResourceNotFoundException {
         Crop myCrop =
@@ -46,7 +46,7 @@ public class CropController {
         return new ResponseEntity<Crop>(myCrop,HttpStatus.OK);
     } // FINDCROPSBYID(LONG)
 
-    @GetMapping("/crops/name/{cropName}")
+    @GetMapping("/crops/find/name/{cropName}")
     public ResponseEntity<Crop> getCropsByName(@PathVariable(value = "cropName") String cropName)
             throws ResourceNotFoundException {
         Crop myCrop;

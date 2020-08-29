@@ -21,12 +21,12 @@ USE `SeedInspectionDB` ;
 DROP TABLE IF EXISTS `SeedInspectionDB`.`producers` ;
 
 CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`producers` (
-  `producer_id` BIGINT NOT NULL,
+  `producer_id` BIGINT NOT NULL AUTO_INCREMENT,
   `producer_short_name` VARCHAR(50) NULL,
-  `producer_name` VARCHAR(45) NULL,
-  `producer_address1` VARCHAR(45) NULL,
-  `producer_address2` VARCHAR(45) NULL,
-  `producer_city` VARCHAR(45) NULL,
+  `producer_name` VARCHAR(50) NULL,
+  `producer_address1` VARCHAR(50) NULL,
+  `producer_address2` VARCHAR(50) NULL,
+  `producer_city` VARCHAR(50) NULL,
   `producer_state` VARCHAR(2) NULL,
   `producer_zip` VARCHAR(10) NULL,
   PRIMARY KEY (`producer_id`))
@@ -156,7 +156,7 @@ CREATE INDEX `fk_purities_samples1_idx` ON `SeedInspectionDB`.`purities` (`purit
 DROP TABLE IF EXISTS `SeedInspectionDB`.`producer_privacy_keys` ;
 
 CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`producer_privacy_keys` (
-  `producer_pkkeys_id` BIGINT NOT NULL,
+  `producer_pkkeys_id` BIGINT NOT NULL AUTO_INCREMENT,
   `producer_pkkeys_key` VARCHAR(2048) NOT NULL,
   `producer_pkkeys_producer_id` BIGINT NOT NULL,
   PRIMARY KEY (`producer_pkkeys_id`),
@@ -245,7 +245,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `SeedInspectionDB`.`producer_contacts` ;
 
 CREATE TABLE IF NOT EXISTS `SeedInspectionDB`.`producer_contacts` (
-  `producer_contact_id` INT NOT NULL,
+  `producer_contact_id` BIGINT NOT NULL AUTO_INCREMENT,
   `producer_contact_type` VARCHAR(45) NOT NULL,
   `producer_contact_person` VARCHAR(45) NULL,
   `producer_contact_information` VARCHAR(200) NULL,
