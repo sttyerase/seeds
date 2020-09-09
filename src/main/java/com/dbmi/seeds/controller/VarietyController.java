@@ -32,12 +32,12 @@ public class VarietyController {
         return ResponseEntity.ok(tableRows);
     } // GETHOME()
 
-    @GetMapping("/varieties/all")
+    @GetMapping("/varieties/find/all")
     public Iterable<Variety> findAllVarieties() {
         return varietyRepository.findAll();
     } // FINDALLVARIETIES()
 
-    @GetMapping("/varieties/id/{varietyId}")
+    @GetMapping("/varieties/find/id/{varietyId}")
     public ResponseEntity<Variety> getVarietiesById(@PathVariable(value = "varietyId") Long varietyId)
             throws ResourceNotFoundException {
         Variety myVariety =
@@ -47,7 +47,7 @@ public class VarietyController {
         return new ResponseEntity<Variety>(myVariety,HttpStatus.OK);
     } // FINDVARIETIESBYID(LONG)
 
-    @GetMapping("/varieties/name/{varietyName}")
+    @GetMapping("/varieties/find/name/{varietyName}")
     public ResponseEntity<Variety> getVarietiesByName(@PathVariable(value = "varietyName") String varietyName)
             throws ResourceNotFoundException {
         Variety myVariety;

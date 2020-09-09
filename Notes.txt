@@ -32,6 +32,7 @@ PUT fails to update ICC code value.  However, POST update succeeds. ** RESOLVED:
 
 Changed javax.persistence.GenerationType to IDENTITY from AUTO per this article:
         https://stackoverflow.com/questions/45688479/org-hibernate-id-enhanced-tablestructure-could-not-read-a-hi-value
+Must create database table primary key column as "NOT NULL AUTO_INCREMENT" to function correctly.
 
 Customer/Producer data: links to other systems??
 ==========================================================================================================================================
