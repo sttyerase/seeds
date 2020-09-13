@@ -37,7 +37,7 @@ public class ProducerController {
     } // FINDALLPRODUCERS()
 
     @GetMapping("/producers/find/id/{producerId}")
-    public ResponseEntity<Producer> getProducersById(@PathVariable(value = "producerId") Long producerId)
+    public ResponseEntity<Producer> getProducerById(@PathVariable(value = "producerId") Long producerId)
             throws ResourceNotFoundException {
         Producer myProducer =
                 producerRepository
@@ -46,18 +46,18 @@ public class ProducerController {
         return new ResponseEntity<Producer>(myProducer,HttpStatus.OK);
     } // FINDPRODUCERSBYID(LONG)
 
-    @GetMapping("/producers/find/name/{producerName}")
-    public ResponseEntity<Producer> getProducersByName(@PathVariable(value = "producerName") String producerName)
+    @GetMapping("/producers/find/name/{producerShortName}")
+    public ResponseEntity<Producer> getProducerByName(@PathVariable(value = "producerShortName") String producerShortName)
             throws ResourceNotFoundException {
         Producer myProducer;
-        Optional<Producer> producerOptional = producerRepository.findByProducerName(producerName);
+        Optional<Producer> producerOptional = producerRepository.findByProducerShortName(producerShortName);
         if(producerOptional.isPresent()){
             myProducer = producerOptional.get();
         } else {
-            throw new ResourceNotFoundException("Unable to locate producer: " + producerName);
+            throw new ResourceNotFoundException("Unable to locate producer: " + producerShortName);
         } // IF-ELSE
         return new ResponseEntity<Producer>(myProducer,HttpStatus.OK);
-    } // FINDPRODUCERSBYID(LONG)
+    } // FINDPRODUCERBYNAME(STRING)
 
     // POST METHODS
     @PostMapping("/producers/new")

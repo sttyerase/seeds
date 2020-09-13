@@ -78,6 +78,7 @@ public class VarietyController {
         variety.setVarietyName(varietyDetails.getVarietyName());
         variety.setVarietyDescription(varietyDetails.getVarietyDescription());
         variety.setVarietyId(varietyDetails.getVarietyId());
+        variety.setVarietyCropId(varietyDetails.getVarietyCropId());
         final Variety updatedVariety = varietyRepository.save(variety);
         return ResponseEntity.ok(updatedVariety);
     } // UPDATEVARIETY(@PATHVARIABLE)
