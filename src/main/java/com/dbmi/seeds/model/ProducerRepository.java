@@ -7,5 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface ProducerRepository extends CrudRepository<Producer, Long> {
-    Optional<Producer> findByProducerName(String producerName);
+    Optional<Producer> findByProducerShortName(String producerShortName);
 } // INTERFACE
