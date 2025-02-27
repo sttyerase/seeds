@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/seedinspection")
 public class CropController {
-    private CropRepository cropRepository;
+    private final CropRepository cropRepository;
 
     @Autowired
     CropController(CropRepository myRepo){
@@ -43,7 +43,7 @@ public class CropController {
                 cropRepository
                         .findById(cropId)
                         .orElseThrow(() -> new ResourceNotFoundException("Crop information not found for id: " + cropId));
-        return new ResponseEntity<Crop>(myCrop,HttpStatus.OK);
+        return new ResponseEntity<>(myCrop,HttpStatus.OK);
     } // FINDCROPSBYID(LONG)
 
     @GetMapping("/crops/find/name/{cropName}")
@@ -56,7 +56,7 @@ public class CropController {
         } else {
             throw new ResourceNotFoundException("Unable to locate crop: " + cropName);
         } // IF-ELSE
-        return new ResponseEntity<Crop>(myCrop,HttpStatus.OK);
+        return new ResponseEntity<>(myCrop,HttpStatus.OK);
     } // FINDCROPSBYID(LONG)
 
     // POST METHODS

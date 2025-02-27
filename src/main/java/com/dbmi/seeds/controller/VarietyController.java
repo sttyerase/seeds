@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -44,7 +44,7 @@ public class VarietyController {
                 varietyRepository
                         .findById(varietyId)
                         .orElseThrow(() -> new ResourceNotFoundException("Variety information not found for id: " + varietyId));
-        return new ResponseEntity<Variety>(myVariety,HttpStatus.OK);
+        return new ResponseEntity<>(myVariety,HttpStatus.OK);
     } // FINDVARIETIESBYID(LONG)
 
     @GetMapping("/varieties/find/name/{varietyName}")
@@ -57,7 +57,7 @@ public class VarietyController {
         } else {
             throw new ResourceNotFoundException("Unable to locate variety: " + varietyName);
         } // IF-ELSE
-        return new ResponseEntity<Variety>(myVariety,HttpStatus.OK);
+        return new ResponseEntity<>(myVariety,HttpStatus.OK);
     } // FINDCROPSBYID(LONG)
 
     // POST METHODS

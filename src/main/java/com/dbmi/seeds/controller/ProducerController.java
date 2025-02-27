@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/seedinspection")
 public class ProducerController {
-    private ProducerRepository producerRepository;
+    private final ProducerRepository producerRepository;
 
     @Autowired
     ProducerController(ProducerRepository myRepo){
@@ -43,7 +43,7 @@ public class ProducerController {
                 producerRepository
                         .findById(producerId)
                         .orElseThrow(() -> new ResourceNotFoundException("Producer information not found for id: " + producerId));
-        return new ResponseEntity<Producer>(myProducer,HttpStatus.OK);
+        return new ResponseEntity<>(myProducer,HttpStatus.OK);
     } // FINDPRODUCERSBYID(LONG)
 
     @GetMapping("/producers/find/name/{producerShortName}")
@@ -56,7 +56,7 @@ public class ProducerController {
         } else {
             throw new ResourceNotFoundException("Unable to locate producer: " + producerShortName);
         } // IF-ELSE
-        return new ResponseEntity<Producer>(myProducer,HttpStatus.OK);
+        return new ResponseEntity<>(myProducer,HttpStatus.OK);
     } // FINDPRODUCERBYNAME(STRING)
 
     // POST METHODS
