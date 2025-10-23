@@ -84,7 +84,7 @@ CREATE INDEX uk_variety_name_crop ON SeedInspectionDB.varieties (variety_name, v
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS SeedInspectionDB.samples ;
 
-CREATE TABLE IF NOT EXISTS samples (
+CREATE TABLE IF NOT EXISTS SeedInspectionDB.samples (
   sample_id BIGINT NOT NULL,
   sample_entry_date DATE NOT NULL,
   sample_producer_id BIGINT NOT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS germinations (
   PRIMARY KEY (germination_id),
   CONSTRAINT fk_germinations_samples
     FOREIGN KEY (germination_sample_id)
-    REFERENCES samples (sample_id)
+    REFERENCES SeedInspectionDB.samples (sample_id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 -- ENGINE = InnoDB
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS SeedInspectionDB.purities (
   PRIMARY KEY (purity_id),
   CONSTRAINT fk_purities_samples
     FOREIGN KEY (purity_sample_id)
-    REFERENCES samples (sample_id)
+    REFERENCES SeedInspectionDB.samples (sample_id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 -- ENGINE = InnoDB
@@ -195,7 +195,7 @@ CREATE TABLE IF NOT EXISTS SeedInspectionDB.fields (
   PRIMARY KEY (field_id),
   CONSTRAINT fk_fields_producers1
     FOREIGN KEY (field_producer_id)
-    REFERENCES producers (producer_id)
+    REFERENCES SeedInspectionDB.producers (producer_id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_fields_varieties1
@@ -272,19 +272,19 @@ CREATE TABLE IF NOT EXISTS SeedInspectionDB.producer_contacts (
 CREATE INDEX fk_producer_contacts_producers_idx ON SeedInspectionDB.producer_contacts (producer_contact_producer_id);
 
 -- SET SQL_MODE = '';
-DROP USER IF EXISTS seedmgr;
+-- DROP USER IF EXISTS seedmgr;
 -- SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-CREATE USER 'seedmgr' IDENTIFIED BY 'password';
+-- CREATE USER 'seedmgr' IDENTIFIED BY 'password';
 
-GRANT ALL ON * TO 'seedmgr';
-GRANT ALL ON TABLE fields TO 'seedmgr';
-GRANT ALL ON TABLE crops TO 'seedmgr';
-GRANT ALL ON TABLE germinations TO 'seedmgr';
-GRANT ALL ON TABLE producer_privacy_keys TO 'seedmgr';
-GRANT ALL ON TABLE producers TO 'seedmgr';
-GRANT ALL ON TABLE purities TO 'seedmgr';
-GRANT ALL ON TABLE samples TO 'seedmgr';
-GRANT ALL ON TABLE varieties TO 'seedmgr';
+-- GRANT ALL ON * TO 'seedmgr';
+-- GRANT ALL ON TABLE fields TO 'seedmgr';
+-- GRANT ALL ON TABLE crops TO 'seedmgr';
+-- GRANT ALL ON TABLE germinations TO 'seedmgr';
+-- GRANT ALL ON TABLE producer_privacy_keys TO 'seedmgr';
+-- GRANT ALL ON TABLE producers TO 'seedmgr';
+-- GRANT ALL ON TABLE purities TO 'seedmgr';
+-- GRANT ALL ON TABLE samples TO 'seedmgr';
+-- GRANT ALL ON TABLE varieties TO 'seedmgr';
 
 -- SET SQL_MODE=@OLD_SQL_MODE;
 -- SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
