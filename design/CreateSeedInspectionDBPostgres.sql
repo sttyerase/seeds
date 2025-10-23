@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS SeedInspectionDB.varieties (
   PRIMARY KEY (variety_id),
   CONSTRAINT fk_varieties_crops
     FOREIGN KEY (variety_crop_id)
-    REFERENCES crops (crop_id)
+    REFERENCES SeedInspectionDB.crops (crop_id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 -- ENGINE = InnoDB
@@ -93,12 +93,12 @@ CREATE TABLE IF NOT EXISTS samples (
   PRIMARY KEY (sample_id),
   CONSTRAINT fk_samples_producers
     FOREIGN KEY (sample_producer_id)
-    REFERENCES producers (producer_id)
+    REFERENCES SeedInspectionDB.producers (producer_id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_samples_varieties
     FOREIGN KEY (sample_variety_id)
-    REFERENCES varieties (variety_id)
+    REFERENCES SeedInspectionDB.varieties (variety_id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 -- ENGINE = InnoDB
@@ -252,9 +252,9 @@ CREATE TABLE IF NOT EXISTS SeedInspectionDB.application_audits (
 -- -----------------------------------------------------
 -- Table producer_contacts
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS producer_contacts ;
+DROP TABLE IF EXISTS SeedInspectionDB.producer_contacts ;
 
-CREATE TABLE IF NOT EXISTS producer_contacts (
+CREATE TABLE IF NOT EXISTS SeedInspectionDB.producer_contacts (
   producer_contact_id BIGINT NOT NULL,
   producer_contact_type VARCHAR(45) NOT NULL,
   producer_contact_person VARCHAR(45) NULL,
@@ -263,13 +263,13 @@ CREATE TABLE IF NOT EXISTS producer_contacts (
   PRIMARY KEY (producer_contact_id),
   CONSTRAINT fk_producer_contacts_producers
     FOREIGN KEY (producer_contact_producer_id)
-    REFERENCES producers (producer_id)
+    REFERENCES SeedInspectionDB.producers (producer_id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 -- ENGINE = InnoDB
 ;
 
-CREATE INDEX fk_producer_contacts_producers_idx ON producer_contacts (producer_contact_producer_id);
+CREATE INDEX fk_producer_contacts_producers_idx ON SeedInspectionDB.producer_contacts (producer_contact_producer_id);
 
 -- SET SQL_MODE = '';
 DROP USER IF EXISTS seedmgr;
