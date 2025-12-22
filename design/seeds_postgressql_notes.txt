@@ -1,0 +1,17 @@
+NOTES ON POSTGRESSQL for SUPABASE:
+
+-- create policy "Allow public access"  on seedinspectiondb.crops for select  to anon  using (true);
+-- GRANT USAGE ON SCHEMA seedinspectiondb TO anon, authenticated, service_role;
+-- GRANT ALL ON ALL TABLES IN SCHEMA seedinspectiondb TO anon, authenticated, service_role;
+-- REVOKE usage on schema seedinspectiondb from anon;
+-- REVOKE all on all tables in SCHEMA seedinspectiondb FROM anon;
+-- DROP POLICY "Allow Public Access" ON seedinspectiondb.crops for select to anon;
+-- CREATE VIEW seedinspectiondb.var_crops AS select variety_id, variety_name, crop_name from seedinspectiondb.varieties inner join seedinspectiondb.crops on variety_crop_id = crop_id order by crop_name, variety_name;
+-- DROP VIEW seedinspectiondb.cropsvar_crops;
+-- GRANT ALL ON seedinspectiondb.var_crops TO service_role;
+-- CREATE SEQUENCE seedinspectiondb.crops_table_id_seq START WITH 150 OWNED BY seedinspectiondb.crops.crop_id;
+-- INSERT into seedinspectiondb.crops VALUES (nextval('seedinspectiondb.crops_table_id_seq'),'BANANA','BANANA / Musa paradisiaca',53129);
+-- select nextval('seedinspectiondb.crops_table_id_seq');
+-- ALTER TABLE seedinspectiondb.CROPS ALTER COLUMN crop_id SET DEFAULT nextval('seedinspectiondb.crops_table_id_seq');
+-- INSERT into seedinspectiondb.crops VALUES (default,'BAMBARA GROUNDNUT','BAMBARA GROUNDNUT / Vigna subterranea',79);
+-- GRANT SELECT ON seedinspectiondb.crops_table_id_seq TO service_role;
